@@ -74,7 +74,7 @@ int main()
     {
         localrows += n % world_size;
     }
-    cout << "Columnas en proceso: " << localColumnas << endl;
+    cout << "Columnas en proceso: " << localrows << endl;
 
     MPI_Finalize();
     return 0;
