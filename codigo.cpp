@@ -64,10 +64,10 @@ int main()
     }
 
     // Crear vector b0
-    double b0[ncols]
+    double b0[ncols];
 
-        // Termino de código --------------------------------------------------------------------------
-        delete[] matrix;
+
+
 
     return 0;
 }
