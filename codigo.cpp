@@ -64,7 +64,17 @@ int main()
     }
 
     // Crear vector b0
-    // double b0[ncols];
+     double b0[ncols];
+
+    // dividir el vector
+    cout << "Numero de columnas: " << ncols << endl;
+    localrows = n / world_size;
+    firstIndex = world_rank * localColumnas;
+    if (world_rank == world_size - 1)
+    {
+        localrows += n % world_size;
+    }
+    cout << "Columnas en proceso: " << localColumnas << endl;
 
     MPI_Finalize();
     return 0;
