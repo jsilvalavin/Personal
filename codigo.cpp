@@ -66,8 +66,6 @@ int main()
     // Crear vector b0
     // double b0[ncols];
 
-
-
-
+    MPI_Finalize();
     return 0;
 }
