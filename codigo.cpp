@@ -64,7 +64,7 @@ int main()
     }
 
     // Crear vector b0
-    double b0[ncols];
+    // double b0[ncols];
 
 
 
