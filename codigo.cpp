@@ -25,8 +25,8 @@ int main()
         file >> ncols;
         cout << "Number of columns: " << ncols << endl;
 
-        int my_firstrow = 0;
-        int my_nrows = nrows;
+        int my_firstrow = 2;
+        int my_nrows = 3;
         cout << "Read " << my_nrows << " rows starting from row " << my_firstrow << endl;
 
         matrix = new double[my_nrows * ncols];
@@ -92,8 +92,9 @@ int main()
     }
     
     double** localmat[nrows*localrows];
+    cout << my_nrows << endl;
 
-    for(int i = 0; i < nrows; i++) // numero de filas
+    for(int i = 0; i < my_nrows; i++) // numero de filas
     {
         for(int j = 0; j < localrows; j++) // numero de columnas
         {
