@@ -72,7 +72,7 @@ int main(){
         localb[i] = 1;
         cout << 1 << endl;
     }
-    print_vec(localb);
+    print_vec(localb, localrows);
     
     // -----------------------------------------------
     MPI_Finalize();
