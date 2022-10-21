@@ -123,7 +123,7 @@ int main(){
 
     // tamaños de envio
     int sizes[world_size];
-    for (int i = 0; i < world_size, i++)
+    for (int i = 0; i < world_size; i++)
     {
         sizes[i] = nrows/world_size;
         if (i == world_size - 1)
