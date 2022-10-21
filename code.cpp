@@ -118,7 +118,6 @@ int main(){
     print_vec(localb, localrows);
 
     // matriz local
-    float** localmat = matrix_generator(localrows, ncols);
     
     // valores de matriz
     // float* localvals = read_matrix(nrows, ncols, firstindex, localrows);
