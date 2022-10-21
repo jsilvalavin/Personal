@@ -12,6 +12,7 @@ int main()
     int nrows, ncols;
     double *matrix;
     double tmp;
+    int n_rows;
 
     ifstream file;
 
