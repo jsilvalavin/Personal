@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <chrono>
+#include <cmath>
 #include <iostream>
 #include <fstream>
 #include <mpi.h>
@@ -144,7 +145,6 @@ int main(){
     vals = (float *)malloc(sizeof(float) * localrows); // probar coma
 
     // norma del vector y vector
-    float norm;
     float b[nrows];
 
     // loop  -------------------------------------------
@@ -159,6 +159,29 @@ int main(){
 
     // traer cosas
     MPI_Allgatherv(vals, localrows, MPI_FLOAT, b, sizes, index, MPI_FLOAT, MPI_COMM_WORLD);
+
+    // calcular nuevo b
+    for (int i = 0; i < localrows; i++)
+    {
+        local_b[i] = 0; // resetear
+        for (int j = 0; j < ncols; j++) // producto punto
+        {
+            local_b[i] += local_mat[i][j]*b[j];
+        }
+    }
+
+    // calcular la suma de las componentes al cuadrado locales
+    float local_sum = 0;
+    for (int i = 0; i < localrows; i++)
+    {
+        local_sum += pow(local_b[i],2);
+    }
+
+    // obtener la norma entera
+    float norm2 = 0;
+    MPI_Allreduce(&local_sum, &norm2, 1, MPI_FLOAT, MPI_SUM, MPI_COMM_WORLD);
+    float norm = pow(norm2, 0.5);
+
 
     free(local_b);
     //free(values);
