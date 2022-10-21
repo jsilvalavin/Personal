@@ -67,6 +67,7 @@ int main()
      double b0[ncols];
 
     // dividir el vector
+    int localrows, firstIndex
     cout << "Numero de columnas: " << ncols << endl;
     localrows = n / world_size;
     firstIndex = world_rank * localrows;
