@@ -92,7 +92,7 @@ int main(){
     }
     for (int i = 0; i < localrows * ncols; i++)
     {
-        file >> my_matrix[i];
+        file >> matrix[i];
     }
     file.close();
 
