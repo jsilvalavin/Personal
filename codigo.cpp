@@ -75,8 +75,16 @@ int main()
     {
         localrows += ncols % world_size;
     }
-    cout << "Columnas en proceso: " << world_rank << " " << localrows << endl;
+    cout << "Columnas en proceso " << world_rank << ": " << localrows << endl;
+    
+    double localVec[localrows]
+    for (int i = 0; i < localrows; i++)
+    {
+        localVec[i] = 1;
+    }
 
+    cout << localVec << endl;
+    // -----------------------------------------------
     MPI_Finalize();
     return 0;
 }
