@@ -94,7 +94,7 @@ int main()
     double** localmat[nrows*localrows];
     for(int i; i < nrows; i++){
         for(int j; i < localrows; j++){
-            cout << "hola! " << endl;
+            cout << i << j << endl;
         }
     }
 
