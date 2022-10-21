@@ -40,7 +40,7 @@ double* read_matrix(int nrows, int ncols, int firstrow, int localrows)
 
     file.close();
 
-    return out
+    return out;
 }
 
 void print_mat(double** matrix, int nrows, int ncols)
