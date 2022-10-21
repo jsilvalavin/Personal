@@ -12,7 +12,10 @@ int main()
     int nrows, ncols;
     double *matrix;
     double tmp;
-    int n_rows;
+    int my_firstrow = 2;
+    int my_nrows = 3;
+
+    my_nrows = 3;
 
     ifstream file;
 
@@ -26,8 +29,6 @@ int main()
         file >> ncols;
         cout << "Number of columns: " << ncols << endl;
 
-        int my_firstrow = 2;
-        int my_nrows = 3;
         cout << "Read " << my_nrows << " rows starting from row " << my_firstrow << endl;
 
         matrix = new double[my_nrows * ncols];
