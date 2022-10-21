@@ -92,10 +92,12 @@ int main()
     }
     
     double** localmat[nrows*localrows];
-    for(int i = 0; i < nrows; i++){
-        for(int j = 0; j < localrows; j++){
-           cout << matrix[i] << endl;
-            // cout << matrix[i][j] << " " << i << " " << j << endl;
+
+    for(int i = 0; i < nrows; i++)
+    {
+        for(int j = 0; j < localrows; j++)
+        {
+            cout << i << " " << j + firstIndex << endl;
         }
     }
 
