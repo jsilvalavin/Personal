@@ -50,6 +50,25 @@ void print_vec(float* vec, int k)
     printf("\n");
 }
 
+float **matrix_generator(int filas, int columnas)
+{
+    float **matrix = (float **)calloc(filas, sizeof(int *));
+
+    for (int i = 0; i < filas; i++)
+    {
+        matrix[i] = (float *)calloc(columnas, sizeof(int));
+    }
+
+    for (int i = 0; i < filas; i++)
+    {
+        for (int j = 0; j < columnas; j++)
+        {
+            matrix[i][j] = 0;
+        }
+    }
+    return matrix;
+}
+
 int main(){
     // Setup --------------------------------------------------------------------------------------
     // Abrir mpi
@@ -95,6 +114,9 @@ int main(){
         file >> matrix[i];
     }
     file.close();
+
+    // matriz local
+    float **local_mat = matrix_generator(localrows, ncols);
 
     //free(locb);
     //free(values);
