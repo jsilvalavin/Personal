@@ -10,11 +10,19 @@ ifstream file;
 
 double **matrix_generator(int filas, int columnas)
 {
-    double **matrix = (double **)calloc(filas, sizeof(double *));
+    double **matrix = (double **)calloc(filas, sizeof(int *));
 
     for (int i = 0; i < filas; i++)
     {
-        matrix[i] = (double *)calloc(columnas, sizeof(double));
+        matrix[i] = (double *)calloc(columnas, sizeof(int));
+    }
+
+    for (int i = 0; i < filas; i++)
+    {
+        for (int j = 0; j < columnas; j++)
+        {
+            matrix[i][j] = 0;
+        }
     }
     return matrix;
 }
