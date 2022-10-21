@@ -103,7 +103,7 @@ int main(){
     int columna = 0;
     for (int i = 0; i < localrows; i++)
     {
-        for (int j = 0; j < ncols, j++)
+        for (int j = 0; j < ncols; j++)
         {
             local_mat[i][j] = matrix[columna];
             columna += 1; 
@@ -114,7 +114,7 @@ int main(){
     // vector local
     float *local_b =(float *)calloc(localrows, sizeof(float));
     // llenar vector inicial
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < localrows; i++)
     {
         local_b[i] = 1;
     }
