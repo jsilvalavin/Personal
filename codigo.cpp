@@ -60,7 +60,8 @@ int main()
     // numero procesos
     if (world_rank == 0)
     {
-        printf("Cantidad de procesos: %i\n\n", world_size);
+        printf("\nCantidad de procesos: %i\n", world_size);
+        cout << "Numero de columnas: " << ncols << endl;
     }
 
     // Crear vector b0
@@ -68,14 +69,13 @@ int main()
 
     // dividir el vector
     int localrows, firstIndex;
-    cout << "Numero de columnas: " << ncols << endl;
     localrows = ncols / world_size;
     firstIndex = world_rank * localrows;
     if (world_rank == world_size - 1)
     {
         localrows += ncols % world_size;
     }
-    cout << "Columnas en proceso: " << localrows << endl;
+    cout << "Columnas en proceso: " << world_rank << " " << localrows << endl;
 
     MPI_Finalize();
     return 0;
