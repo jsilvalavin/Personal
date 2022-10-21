@@ -26,7 +26,7 @@ int main()
         cout << "Number of columns: " << ncols << endl;
 
         int my_firstrow = 0;
-        int my_nrows = nrows
+        int my_nrows = nrows;
         cout << "Read " << my_nrows << " rows starting from row " << my_firstrow << endl;
 
         matrix = new double[my_nrows * ncols];
