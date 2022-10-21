@@ -150,7 +150,7 @@ int main(){
     for (int k = 0; k < iteraciones; k++)
     {
         // llenar el mensaje a llenar
-        for (int l = 0; l < localrows, l++)
+        for (int l = 0; l < localrows; l++)
         {
             vals[l] = local_b[l];
         }
