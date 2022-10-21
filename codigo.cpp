@@ -77,7 +77,7 @@ int main()
     }
     cout << "Columnas en proceso " << world_rank << ": " << localrows << endl;
     
-    double localVec[localrows]
+    double localVec[localrows];
     for (int i = 0; i < localrows; i++)
     {
         localVec[i] = 1;
