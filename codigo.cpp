@@ -73,7 +73,7 @@ int main()
     firstIndex = world_rank * localrows;
     if (world_rank == world_size - 1)
     {
-        localrows += n % world_size;
+        localrows += ncols % world_size;
     }
     cout << "Columnas en proceso: " << localrows << endl;
 
