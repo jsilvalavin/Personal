@@ -8,13 +8,13 @@ using namespace std;
 #include <fstream>
 ifstream file;
 
-double **matrix_generator(int filas, int columnas)
+float **matrix_generator(int filas, int columnas)
 {
-    double **matrix = (double **)calloc(filas, sizeof(int *));
+    float **matrix = (float **)calloc(filas, sizeof(int *));
 
     for (int i = 0; i < filas; i++)
     {
-        matrix[i] = (double *)calloc(columnas, sizeof(int));
+        matrix[i] = (float *)calloc(columnas, sizeof(int));
     }
 
     for (int i = 0; i < filas; i++)
@@ -27,14 +27,14 @@ double **matrix_generator(int filas, int columnas)
     return matrix;
 }
 
-double* read_matrix(int nrows, int ncols, int firstrow, int localrows)
+float* read_matrix(int nrows, int ncols, int firstrow, int localrows)
 {
-    double tmp;
+    float tmp;
     ifstream file;
     file.open("matrix.txt");
 
-    double* out;
-    out = new double [localrows * ncols];
+    float* out;
+    out = new float [localrows * ncols];
 
     for (int i = 0; i < (firstrow - 1) * ncols; i++)
     {
@@ -51,7 +51,7 @@ double* read_matrix(int nrows, int ncols, int firstrow, int localrows)
     return out;
 }
 
-void print_mat(double** matrix, int nrows, int ncols)
+void print_mat(float** matrix, int nrows, int ncols)
 {
     printf("\n");
     for (int i = 0; i < nrows; i++)
@@ -64,7 +64,7 @@ void print_mat(double** matrix, int nrows, int ncols)
     }
 }
 
-void print_vec(double* vec, int k)
+void print_vec(float* vec, int k)
 {
     printf("\n");
     for (int i = 0; i < k; i++)
@@ -76,21 +76,21 @@ void print_vec(double* vec, int k)
 
 int main(){
     // Setup --------------------------------------------------------------------------------------
+    // Abrir mpi
+    MPI_Init(NULL, NULL);
+    int world_size, world_rank;
+    MPI_Comm_size(MPI_COMM_WORLD, &world_size);
+    MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
+
     file.open("matrix.txt");
-    double* matrix;
-    double tmp;
-    int nrows, ncols; // asumiendo matrices cuadradas!
+    float* matrix;
+    float tmp;
+    int nrows, ncols; 
 
     file >> nrows;
     file >> ncols;
 
     int iteraciones = 100000000;
-
-    // Abrir mpi 
-    MPI_Init(NULL, NULL);
-    int world_size, world_rank;
-    MPI_Comm_size(MPI_COMM_WORLD, &world_size);
-    MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
 
     // parametros
     int firstindex, localrows;
@@ -109,7 +109,7 @@ int main(){
     }
 
     // vector local
-    double* localb = (double*)calloc(localrows, sizeof(double));
+    float* localb = (float*)calloc(localrows, sizeof(float));
     // llenar vector
     for (int i = 0; i < ncols; i++)
     {
@@ -118,10 +118,10 @@ int main(){
     print_vec(localb, localrows);
 
     // matriz local
-    double** localmat = matrix_generator(localrows, ncols);
+    float** localmat = matrix_generator(localrows, ncols);
     
     // valores de matriz
-    // double* localvals = read_matrix(nrows, ncols, firstindex, localrows);
+    // float* localvals = read_matrix(nrows, ncols, firstindex, localrows);
     
     // -----------------------------------------------
     MPI_Finalize();
