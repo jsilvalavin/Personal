@@ -20,6 +20,16 @@ double **matrix_generator(double filas, int columnas, int world_rank)
     return matrix;
 }
 
+void print_vec(double* vec, int k)
+{
+    printf("\n");
+    for (int i = 0; i < k; i++)
+    {
+        printf("%f ", vec[i]);
+    }
+    printf("\n");
+}
+
 int main(){
     // Setup --------------------------------------------------------------------------------------
     file.open("matrix.txt");
@@ -56,6 +66,13 @@ int main(){
 
     // vector local
     double* localb = (double*)calloc(localrows, sizeof(double));
+    // llenar vector
+    for (int i = 0; i < ncols; i++)
+    {
+        localb[i] = 1;
+        cout << 1 << endl;
+    }
+    print_vec(localb);
     
     // -----------------------------------------------
     MPI_Finalize();
