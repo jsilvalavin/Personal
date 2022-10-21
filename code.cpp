@@ -53,19 +53,6 @@ double* read_matrix(int my_firstrow, int my_nrows)
     return my_matrix;
 }
 
-// double** make_matrix(double* matrix, int nrows, int ncols)
-// {
-//     double** out = new double [nrows * ncols];
-//     for (int i = 0; i < nrows; i++)
-//     {
-//         for (int j = 0; j < ncols; j++)
-//         {
-//             out[i][j] = matrix[i*nrows + j];
-//         }
-//     }
-//     return out;
-// }
-
 void print_matrix(float **matrix, int filas, int columnas)
 {
     printf("\n");
@@ -119,7 +106,10 @@ int main(){
     // double** localmat;
     // localmat = make_matrix(localmat_vec, localrows, ncols);
 
-    print_matrix(localmat_vec, 1, localrows*ncols);
+    for (int i = 0; i < localrows*ncols; i++)
+    {
+        cout << localmat_vec[i] << endl;
+    }
 
     // -----------------------------------------------
     MPI_Finalize();
