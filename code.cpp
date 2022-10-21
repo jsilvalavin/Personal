@@ -99,6 +99,49 @@ int main(){
     // matriz local
     float **local_mat = matrix_generator(localrows, ncols);
 
+    // llenar matriz local
+    int columna = 0;
+    for (int i = 0; i < localrows; i++)
+    {
+        for (int j = 0; j < ncols, j++)
+        {
+            local_mat[i][j] = matrix[columna];
+            columna += 1; 
+            // esto cuenta 1 a 1 los elementos guardados
+        }
+    }
+
+    // vector local
+    float *local_b =(float *)calloc(localrows, sizeof(float));
+    // llenar vector inicial
+    for (int i = 0; i < n; i++)
+    {
+        vector[i] = 1;
+    }
+
+    // pegar las cosas
+
+    // tamaños de envio
+    int sizes[world_size];
+    for (int i = 0; i < world_size, i++)
+    {
+        sizes[i] = nrows/world_size;
+        if (i == world_size - 1)
+        {
+            sizes[i] += nrows % world_size;
+        }
+    }
+    
+    // indices de donde van
+    int index[world_size];
+    for  (int i = 0; i < world_size; i++)
+    {
+        index[i] = i*(nrows / world_size);
+    }
+
+    // juntar vector b
+    
+
     //free(locb);
     //free(values);
     //delete[] my_matrix;
