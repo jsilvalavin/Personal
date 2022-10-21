@@ -8,25 +8,6 @@ using namespace std;
 #include <fstream>
 ifstream file;
 
-float **matrix_generator(int filas, int columnas)
-{
-    float **matrix = (float **)calloc(filas, sizeof(int *));
-
-    for (int i = 0; i < filas; i++)
-    {
-        matrix[i] = (float *)calloc(columnas, sizeof(int));
-    }
-
-    for (int i = 0; i < filas; i++)
-    {
-        for (int j = 0; j < columnas; j++)
-        {
-            matrix[i][j] = 0;
-        }
-    }
-    return matrix;
-}
-
 void print_mat(float** matrix, int nrows, int ncols)
 {
     printf("\n");
