@@ -108,7 +108,7 @@ int main(){
 
     for (int i = 0; i < localrows*ncols; i++)
     {
-        cout << localmat_vec[i] << endl;
+        cout << localmat_vec[firstIndex + i] << endl;
     }
 
     // -----------------------------------------------
