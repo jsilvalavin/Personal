@@ -10,7 +10,7 @@ int main()
 {
     // Leer matriz ---------------------------------------------------------------------------------
     int nrows, ncols;
-    double *matrix;
+    double **matrix;
     double tmp;
 
     ifstream file;
