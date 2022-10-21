@@ -10,7 +10,7 @@ int main()
 {
     // Leer matriz ---------------------------------------------------------------------------------
     int nrows, ncols;
-    double **matrix;
+    double *matrix;
     double tmp;
 
     ifstream file;
@@ -94,8 +94,8 @@ int main()
     double** localmat[nrows*localrows];
     for(int i = 0; i < nrows; i++){
         for(int j = 0; j < localrows; j++){
-            localmat[i][j] = matrix[i][j];
-            cout << matrix[i][j] << " " << i << " " << j << endl;
+           cout << matrix[i] << endl;
+            // cout << matrix[i][j] << " " << i << " " << j << endl;
         }
     }
 
