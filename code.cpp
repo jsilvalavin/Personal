@@ -119,7 +119,7 @@ int main(){
     // double** localmat;
     // localmat = make_matrix(localmat_vec, localrows, ncols);
 
-    print_matrix(localmat_vec);
+    print_matrix(localmat_vec, 1, localrows*ncols);
 
     // -----------------------------------------------
     MPI_Finalize();
