@@ -155,7 +155,7 @@ int main(){
         {
             vals[l] = local_b[l];
         }
-    }
+    
 
     // traer cosas
     MPI_Allgatherv(vals, localrows, MPI_FLOAT, b, sizes, index, MPI_FLOAT, MPI_COMM_WORLD);
@@ -182,6 +182,12 @@ int main(){
     MPI_Allreduce(&local_sum, &norm2, 1, MPI_FLOAT, MPI_SUM, MPI_COMM_WORLD);
     float norm = pow(norm2, 0.5);
 
+    for (int i = 0; i < localrows; i++) // normalizar por el vector
+    {
+        local_b[i] = (float) local_b[i] / float norm;
+    }
+
+    }
 
     free(local_b);
     //free(values);
