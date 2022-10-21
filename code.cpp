@@ -143,8 +143,9 @@ int main(){
     float* vals;
     vals = (float *)malloc(sizeof(float) * localrows); // probar coma
 
-    // norma del vector
+    // norma del vector y vector
     float norm;
+    float b[nrows];
 
     // loop  -------------------------------------------
     for (int k = 0; k < iteraciones; k++)
@@ -155,6 +156,9 @@ int main(){
             vals[l] = local_b[l];
         }
     }
+
+    // traer cosas
+    MPI_Allgatherv(vals, localrows, MPI_FLOAT, b, sizes, index, MPI_FLOAT, MPI_COMM_WORLD);
 
     free(local_b);
     //free(values);
