@@ -184,7 +184,7 @@ int main(){
 
     for (int i = 0; i < localrows; i++) // normalizar por el vector
     {
-        local_b[i] = (float) local_b[i] / float norm;
+        local_b[i] = (float) local_b[i] / (float) norm;
     }
 
     }
