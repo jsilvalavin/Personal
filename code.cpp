@@ -116,7 +116,7 @@ int main(){
     // llenar vector inicial
     for (int i = 0; i < n; i++)
     {
-        vector[i] = 1;
+        local_b[i] = 1;
     }
 
     // pegar las cosas
@@ -140,9 +140,9 @@ int main(){
     }
 
     // juntar vector b
-    
 
-    //free(locb);
+
+    free(local_b);
     //free(values);
     //delete[] my_matrix;
     MPI_Finalize();
