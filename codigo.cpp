@@ -93,11 +93,12 @@ int main()
     
     double** localmat[nrows*localrows];
 
-    for(int i = 0; i < nrows; i++)
+    for(int i = 0; i < nrows; i++) // numero de filas
     {
-        for(int j = 0; j < localrows; j++)
+        for(int j = 0; j < localrows; j++) // numero de columnas
         {
             cout << i << " " << j + firstIndex << endl;
+            cout << matrix[(i-1)*ncols + firstIndex + j] << endl;
         }
     }
 
