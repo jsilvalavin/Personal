@@ -139,8 +139,22 @@ int main(){
         index[i] = i*(nrows / world_size);
     }
 
-    // juntar vector b
+    // vector resultante
+    float* vals;
+    vals = (float *)malloc(sizeof(float) * localrows); // probar coma
 
+    // norma del vector
+    float norm;
+
+    // loop  -------------------------------------------
+    for (int k = 0; k < iteraciones; k++)
+    {
+        // llenar el mensaje a llenar
+        for (int l = 0; l < localrows, l++)
+        {
+            vals[l] = local_b[l];
+        }
+    }
 
     free(local_b);
     //free(values);
