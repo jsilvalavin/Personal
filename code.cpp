@@ -6,7 +6,7 @@
 #include <mpi.h>
 using namespace std;
 
-int read_matrix(int my_firstrow, int my_nrows)
+double* read_matrix(int my_firstrow, int my_nrows)
 {
     int nrows, ncols;
     double *my_matrix;
