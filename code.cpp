@@ -113,7 +113,7 @@ int main(){
     double** localmat = matrix_generator(localrows, ncols);
     
     // valores de matriz
-    double* localvals = read_matrix(nrows, ncols, firstindex, localrows);
+    // double* localvals = read_matrix(nrows, ncols, firstindex, localrows);
     
     // -----------------------------------------------
     MPI_Finalize();
