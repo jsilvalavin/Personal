@@ -69,21 +69,35 @@ int main()
 
     // dividir el vector
     int localrows, firstIndex;
+    // Asumo que la matriz es cuadrada!
+
     localrows = ncols / world_size;
     firstIndex = world_rank * localrows;
+    // parametros locales
+
     if (world_rank == world_size - 1)
     {
         localrows += ncols % world_size;
     }
+
+    // printeo
     cout << "Columnas en proceso " << world_rank << ": " << localrows << endl;
     
-    double localVec[localrows];
+    // vector local (inicial)
+    double localvec0[localrows];
+
     for (int i = 0; i < localrows; i++)
     {
-        localVec[i] = 1;
+        localvec0[i] = 1;
+    }
+    
+    double** localmat[nrows, localrows];
+    for(int i; i < nrows; i++){
+        for(int j; i < localrows; i++){
+            cout << "hola! " << endl;
+        }
     }
 
-    cout << localVec << endl;
     // -----------------------------------------------
     MPI_Finalize();
     return 0;
