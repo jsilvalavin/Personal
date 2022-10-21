@@ -5,72 +5,32 @@
 #include <fstream>
 #include <mpi.h>
 using namespace std;
+#include <fstream>
+ifstream file;
 
-double* read_matrix(int my_firstrow, int my_nrows)
+double **matrix_generator(double filas, int columnas, int world_rank)
 {
-    int nrows, ncols;
-    double *my_matrix;
-    double tmp;
+    double **matrix = (double **)calloc(filas, sizeof(double *));
 
-    ifstream file;
-
-    file.open("matrix.txt");
-
-    if (file.is_open())
-    {
-        file >> nrows;
-        cout << "Number of rows: " << nrows << endl;
-
-        file >> ncols;
-        cout << "Number of columns: " << ncols << endl;
-
-        cout << "Read " << my_nrows << " rows starting from row " << my_firstrow << endl;
-
-        my_matrix = new double[my_nrows * ncols];
-
-        for (int i = 0; i < (my_firstrow - 1) * ncols; i++)
-        {
-            file >> tmp;
-            cout << "skipped: " << tmp << endl;
-        }
-
-        cout << "Store matrix elements" << endl;
-        for (int i = 0; i < my_nrows * ncols; i++)
-        {
-            file >> my_matrix[i];
-            cout << i << " " << my_matrix[i] << endl;
-        }
-
-        file.close();
-    }
-    else
-    {
-        cout << "Unable to open file." << endl;
-    }
-
-    delete[] my_matrix;
-
-    return my_matrix;
-}
-
-void print_matrix(float **matrix, int filas, int columnas)
-{
-    printf("\n");
     for (int i = 0; i < filas; i++)
     {
-        for (int j = 0; j < columnas; j++)
-        {
-            printf("%f ", matrix[i][j]);
-        }
-        printf("\n");
+        matrix[i] = (double *)calloc(columnas, sizeof(double));
     }
+
+    return matrix;
 }
 
 int main(){
     // Setup --------------------------------------------------------------------------------------
-    int ncols = 7;
-    int n = ncols;
-    int nrows = ncols;
+    file.open("matrix.txt");
+    double* matrix;
+    double tmp;
+    int nrows, ncols; // asumiendo matrices cuadradas!
+
+    file >> nrows;
+    file >> ncols;
+
+    int iteraciones = 100000000;
 
     // Abrir mpi
     MPI_Init(NULL, NULL);
@@ -78,39 +38,25 @@ int main(){
     MPI_Comm_size(MPI_COMM_WORLD, &world_size);
     MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
 
+    // parametros
+    int firstindex, localrows;
+
+    localrows = nrows / world_size;
+    firstindex = world_rank * localrows;
+    if (world_rank == world_size - 1)
+    {
+        localrows += nrows % world_size;
+    }
+
     // numero procesos
     if (world_rank == 0)
     {
         printf("\nCantidad de procesos: %i\n", world_size);
-        cout << "Numero de columnas: " << ncols << endl;
     }
 
-    // Crear vector b0
-    double b0[ncols];
-
-    // Parametros locales
-    int localrows, firstIndex;
-
-    localrows = ncols / world_size;
-    firstIndex = world_rank * localrows;
+    // vector local
+    double* localb (double*)calloc(localrows, sizeof(double));
     
-    if (world_rank == world_size - 1)
-    {
-        localrows += ncols % world_size;
-    }
-
-    // Sacar matriz local
-    double* localmat_vec;
-    localmat_vec = read_matrix(firstIndex, localrows);
-
-    // double** localmat;
-    // localmat = make_matrix(localmat_vec, localrows, ncols);
-
-    for (int i = 0; i < localrows*ncols; i++)
-    {
-        cout << localmat_vec[firstIndex + i] << endl;
-    }
-
     // -----------------------------------------------
     MPI_Finalize();
     return 0;
