@@ -96,5 +96,9 @@ int main(){
     }
     file.close();
 
-
+    //free(locb);
+    //free(values);
+    //delete[] my_matrix;
+    MPI_Finalize();
+    return 0;
 }
