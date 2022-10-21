@@ -27,30 +27,6 @@ float **matrix_generator(int filas, int columnas)
     return matrix;
 }
 
-float* read_matrix(int nrows, int ncols, int firstrow, int localrows)
-{
-    float tmp;
-    ifstream file;
-    file.open("matrix.txt");
-
-    float* out;
-    out = new float [localrows * ncols];
-
-    for (int i = 0; i < (firstrow - 1) * ncols; i++)
-    {
-        file >> tmp;
-    }
-
-    for (int i = 0; i < localrows * ncols; i++)
-    {
-        file >> out[i];
-    }
-
-    file.close();
-
-    return out;
-}
-
 void print_mat(float** matrix, int nrows, int ncols)
 {
     printf("\n");
@@ -92,7 +68,7 @@ int main(){
 
     int iteraciones = 100000000;
 
-    // parametros
+    // mas parametros
     int firstindex, localrows;
 
     localrows = nrows / world_size;
@@ -108,21 +84,17 @@ int main(){
         printf("\nCantidad de procesos: %i\n", world_size);
     }
 
-    // vector local
-    float* localb = (float*)calloc(localrows, sizeof(float));
-    // llenar vector
-    for (int i = 0; i < ncols; i++)
+    // matriz de valores
+    matrix = new float[localrows * ncols];
+    for (int i = 0; i < (firstindex)*ncols; i++)
     {
-        localb[i] = 1;
+        file >> tmp;
     }
-    print_vec(localb, localrows);
+    for (int i = 0; i < localrows * ncols; i++)
+    {
+        file >> my_matrix[i];
+    }
+    file.close();
 
-    // matriz local
-    
-    // valores de matriz
-    // float* localvals = read_matrix(nrows, ncols, firstindex, localrows);
-    
-    // -----------------------------------------------
-    MPI_Finalize();
-    return 0;
+
 }
