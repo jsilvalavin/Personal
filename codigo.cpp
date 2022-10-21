@@ -91,9 +91,9 @@ int main()
         localvec0[i] = 1;
     }
     
-    double** localmat[nrows, localrows];
+    double** localmat[nrows*localrows];
     for(int i; i < nrows; i++){
-        for(int j; i < localrows; i++){
+        for(int j; i < localrows; j++){
             cout << "hola! " << endl;
         }
     }
