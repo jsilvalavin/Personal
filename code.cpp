@@ -53,6 +53,32 @@ double* read_matrix(int my_firstrow, int my_nrows)
     return my_matrix;
 }
 
+double** make_matrix(double* matrix, int nrows, int ncols)
+{
+    double** out = new double [nrows * ncols];
+    for (int i = 0; i < nrows; i++)
+    {
+        for (int j = 0; j < ncols; j++)
+        {
+            out[i][j] = matrix[i*nrows + j];
+        }
+    }
+    return out;
+}
+
+void print_matrix(float **matrix, int filas, int columnas)
+{
+    printf("\n");
+    for (int i = 0; i < filas; i++)
+    {
+        for (int j = 0; j < columnas; j++)
+        {
+            printf("%f ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
 int main(){
     // Setup --------------------------------------------------------------------------------------
     int ncols = 7;
@@ -64,6 +90,7 @@ int main(){
     int world_size, world_rank;
     MPI_Comm_size(MPI_COMM_WORLD, &world_size);
     MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
+
     // numero procesos
     if (world_rank == 0)
     {
@@ -74,15 +101,27 @@ int main(){
     // Crear vector b0
     double b0[ncols];
 
-    // dividir el vector
+    // Parametros locales
     int localrows, firstIndex;
 
     localrows = ncols / world_size;
     firstIndex = world_rank * localrows;
-    // parametros locales
-
+    
     if (world_rank == world_size - 1)
     {
         localrows += ncols % world_size;
     }
+
+    // Sacar matriz local
+    double* localmat_vec;
+    localmat_vec = read_matrix(firstIndex, localrows);
+
+    double** localmat;
+    localmat = make_matrix(localmat_vec, localrows, ncols);
+
+    print_matrix(localmat);
+
+    // -----------------------------------------------
+    MPI_Finalize();
+    return 0;
 }
