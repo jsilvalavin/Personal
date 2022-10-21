@@ -55,7 +55,7 @@ int main(){
     }
 
     // vector local
-    double* localb (double*)calloc(localrows, sizeof(double));
+    double* localb = (double*)calloc(localrows, sizeof(double));
     
     // -----------------------------------------------
     MPI_Finalize();
