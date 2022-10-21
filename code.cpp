@@ -141,24 +141,24 @@ int main(){
     }
 
     // vector resultante
-    float* vals;
-    vals = (float *)malloc(sizeof(float) * localrows); // probar coma
+    float* last_local_b;
+    last_local_b = (float *)malloc(sizeof(float) * localrows); // probar coma
 
     // norma del vector y vector
     float b[nrows];
+    float norm;
 
     // loop  -------------------------------------------
     for (int k = 0; k < iteraciones; k++)
     {
-        // llenar el mensaje a llenar
         for (int l = 0; l < localrows; l++)
         {
-            vals[l] = local_b[l];
+            last_local_b[l] = local_b[l];
         }
     
 
     // traer cosas
-    MPI_Allgatherv(vals, localrows, MPI_FLOAT, b, sizes, index, MPI_FLOAT, MPI_COMM_WORLD);
+    MPI_Allgatherv(last_local_b, localrows, MPI_FLOAT, b, sizes, index, MPI_FLOAT, MPI_COMM_WORLD);
 
     // calcular nuevo b
     for (int i = 0; i < localrows; i++)
@@ -180,7 +180,7 @@ int main(){
     // obtener la norma entera
     float norm2 = 0;
     MPI_Allreduce(&local_sum, &norm2, 1, MPI_FLOAT, MPI_SUM, MPI_COMM_WORLD);
-    float norm = pow(norm2, 0.5);
+    norm = pow(norm2, 0.5);
 
     for (int i = 0; i < localrows; i++) // normalizar por el vector
     {
@@ -189,9 +189,33 @@ int main(){
 
     }
 
+    // componentos locales de mu
+    float local_numerator = 0;
+    float local_denominator = 0;
+    for (int i = 0; i < localrows; i++)
+    {
+        local_numerator += last_local_b[i]*(local_b[i]*norm);
+        local_denominator += last_local_b[i]*last_local_b[i];
+    }
+
+    // encontrar mu
+    float numerator, denominator;
+
+    MPI_Reduce(&local_numerator, &numerator, 1, MPI_FLOAT, MPI_SUM, 0, MPI_COMM_WORLD);
+    MPI_Reduce(&local_denominator, &denominator, 1, MPI_FLOAT, MPI_SUM, 0, MPI_COMM_WORLD);
+
+
+    // Printeo final
+
+    if (world_rank == 0)
+    {
+        printf("valor propio: %f", numerator/denominator);
+    }
+
+    // Despejar memoria
     free(local_b);
-    //free(values);
-    //delete[] my_matrix;
+    free(last_local_b);
+    delete[] matrix;
     MPI_Finalize();
     return 0;
 }
