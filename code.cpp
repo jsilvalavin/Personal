@@ -53,11 +53,17 @@ float **matrix_generator(int filas, int columnas)
 
 int main(){
     // Setup --------------------------------------------------------------------------------------
+    double start, end;
+
     // Abrir mpi
     MPI_Init(NULL, NULL);
     int world_size, world_rank;
     MPI_Comm_size(MPI_COMM_WORLD, &world_size);
     MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
+
+    // tiempo
+    MPI_Barrier(MPI_COMM_WORLD); /* IMPORTANT */
+    start = MPI_Wtime();
 
     file.open("matrix.txt");
     float* matrix;
@@ -216,6 +222,16 @@ int main(){
     }
 
     delete[] matrix;
+
+    MPI_Barrier(MPI_COMM_WORLD); /* IMPORTANT */
+    end = MPI_Wtime();
+
+
     MPI_Finalize();
     return 0;
+
+    if (rank == 0)
+    { /* use time on master node */
+        printf("Runtime = %f\n", end - start);
+    }
 }
