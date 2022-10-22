@@ -211,7 +211,7 @@ int main(){
     if (world_rank == 0)
     {
         printf("valor propio: %f\n", numerator/denominator);
-        printf("Error relativo: %f \n", abs(10 - numerator/denominator)/10)
+        printf("Error relativo: %f \n", abs(10 - numerator/denominator)/10);
 
     }
 
