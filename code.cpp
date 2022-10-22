@@ -228,10 +228,10 @@ int main(){
 
 
     MPI_Finalize();
-    return 0;
 
     if (world_rank == 0)
     { /* use time on master node */
         printf("Runtime = %f\n", end - start);
     }
+    return 0;
 }
