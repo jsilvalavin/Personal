@@ -6,8 +6,14 @@
 
 #SBATCH --output=log.out
 
-#SBATCH --ntasks=4
+#SBATCH --ntasks=30
 #SBATCH --cpus-per-task=1
 
 mpic++ MPI_mat_vec.cpp -std=c++11
-mpirun a.out
+time mpirun -np 1 ./a.out 40000
+time mpirun -np 5 ./a.out 40000
+time mpirun -np 10 ./a.out 40000
+time mpirun -np 15 ./a.out 40000
+time mpirun -np 20 ./a.out 40000
+time mpirun -np 25 ./a.out 40000
+time mpirun -np 30 ./a.out 40000

@@ -61,10 +61,6 @@ int main(){
     MPI_Comm_size(MPI_COMM_WORLD, &world_size);
     MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
 
-    // tiempo
-    MPI_Barrier(MPI_COMM_WORLD); /* IMPORTANT */
-    start = MPI_Wtime();
-
     file.open("matrix.txt");
     float* matrix;
     float tmp;
@@ -229,9 +225,5 @@ int main(){
 
     MPI_Finalize();
 
-    if (world_rank == 0)
-    { /* use time on master node */
-        printf("Runtime = %f\n", end - start);
-    }
     return 0;
 }
