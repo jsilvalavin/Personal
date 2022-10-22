@@ -77,7 +77,7 @@ int main(){
     file >> nrows;
     file >> ncols;
 
-    int iteraciones = 100000;
+    int iteraciones = 1000;
 
     // mas parametros
     int firstindex, localrows;
