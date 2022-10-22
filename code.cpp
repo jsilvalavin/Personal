@@ -222,6 +222,7 @@ int main(){
     {
         printf("valor propio: %f\n", numerator/denominator);
         printf("Error relativo: %f \n", abs(10 - numerator/denominator)/10);
+        printf("HEcho con %f procesadores \n", world_size)
 
     }
 
