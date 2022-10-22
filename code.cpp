@@ -67,7 +67,7 @@ int main(){
     file >> nrows;
     file >> ncols;
 
-    int iteraciones = 100000000;
+    int iteraciones = 100000;
 
     // mas parametros
     int firstindex, localrows;
@@ -84,6 +84,7 @@ int main(){
     {
         printf("\nCantidad de procesos: %i\n", world_size);
     }
+    printf("Proceso %i \n", world_rank);
 
     // matriz de valores
     matrix = new float[localrows * ncols];
@@ -209,12 +210,11 @@ int main(){
 
     if (world_rank == 0)
     {
-        printf("valor propio: %f", numerator/denominator);
+        printf("valor propio: %f\n", numerator/denominator);
+        printf("Error relativo: %f \n", abs(10 - numerator/denominator)/10)
+
     }
 
-    // Despejar memoria
-    free(local_b);
-    free(last_local_b);
     delete[] matrix;
     MPI_Finalize();
     return 0;
