@@ -9,7 +9,7 @@
 #SBATCH --ntasks=30
 #SBATCH --cpus-per-task=1
 
-mpic++ MPI_mat_vec.cpp -std=c++11
+mpic++ code.cpp -std=c++11
 time mpirun -np 1 ./a.out 40000
 time mpirun -np 5 ./a.out 40000
 time mpirun -np 10 ./a.out 40000
